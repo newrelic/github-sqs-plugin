@@ -77,6 +77,9 @@ public class GitHubTriggerProcessor implements TriggerProcessor {
         if(json.has("Type")) {
             String msg = json.getString("Message");
             if(msg != null) {
+                if (msg.startsWith("\"")) {
+                    msg = msg.substring(1, msg.length() - 1);
+                }
                 return JSONObject.fromObject(msg);
             }
         } else if (json.has("repository")){
